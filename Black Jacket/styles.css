@@ -1,0 +1,103 @@
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: darkgreen;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+h1 {
+  color: goldenrod;
+}
+button {
+  font-size: 1.2rem;
+  width: 150px;
+  background-color: goldenrod;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+#message-el {
+  font-style: italic;
+}
+#cardDisplay {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#cardDisplay > div {
+  width: 130px;
+  height: 100%;
+}
+.cardOne {
+  background-image: url(./assets/Cards/as.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardTwo {
+  background-image: url(./assets/Cards/two.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardThree {
+  background-image: url(./assets/Cards/three.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardFour {
+  background-image: url(./assets/Cards/four.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardFive {
+  background-image: url(./assets/Cards/five.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardSix {
+  background-image: url(./assets/Cards/six.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardSeven {
+  background-image: url(./assets/Cards/seven.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardEight {
+  background-image: url(./assets/Cards/eight.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardNine {
+  background-image: url(./assets/Cards/nine.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardTen {
+  background-image: url(./assets/Cards/ten.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.cardError{
+  background-image: url(./assets/Cards/error.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
