@@ -24,13 +24,6 @@ let messageEl = document.getElementById("message-el");
 let sumEl = document.getElementById("sum-el");
 let cardEl = document.getElementById("cards-el");
 let extraCardOne = false;
-/* let player = {
-  name: "Gabriel",
-  money: 150
-};
-
-let playerEl = document.getElementById("player-el");
-playerEl.textContent = player.name + ": " + player.money + "€"; */
 
 function randomCard() {
   let randomNumbers = Math.floor(Math.random() * 13) + 1;
