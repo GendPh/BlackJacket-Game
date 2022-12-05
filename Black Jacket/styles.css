@@ -23,12 +23,13 @@ button {
   font-style: italic;
 }
 #cardDisplay {
-  width: 100%;
+  max-width: 100%;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  padding: 0 5px;
 }
 
 #cardDisplay > div {
@@ -40,64 +41,87 @@ button {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardTwo {
   background-image: url(./assets/Cards/two.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardThree {
   background-image: url(./assets/Cards/three.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardFour {
   background-image: url(./assets/Cards/four.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardFive {
   background-image: url(./assets/Cards/five.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardSix {
   background-image: url(./assets/Cards/six.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardSeven {
   background-image: url(./assets/Cards/seven.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardEight {
   background-image: url(./assets/Cards/eight.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardNine {
   background-image: url(./assets/Cards/nine.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
 .cardTen {
   background-image: url(./assets/Cards/ten.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
 }
-.cardError{
+.cardError {
   background-image: url(./assets/Cards/error.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 1s ease;
+}
+@media (max-width: 768px) {
+  #cardDisplay {
+    height: auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    place-items: center;
+  }
+  #cardDisplay > div {
+    width: 100%;
+    height: 150px;
+  }
 }
