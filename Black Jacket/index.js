@@ -1,3 +1,20 @@
+
+let playerTest = {
+  name: "",
+  money: 150
+}
+let playerEl = document.getElementById("player-el");
+$(document).ready(function () {
+  let youWantToStartTheGame = confirm("This is a Black Jacket Game. \n How to play: \n 1 => Every time you start a new board you lose 15€ \n 2=> If your cards sum to 21 you Black Jacket and win 30€;\n 3=> If your cards sum is higher then 21 you lose the game;\n Do you want to play?");
+  if (youWantToStartTheGame === true) {
+    playerTest.name = prompt("Please insert your name below:");
+  } else {
+    location.reload();
+  }
+  playerEl.textContent = playerTest.name + ": " + playerTest.money + "€";
+})
+
+
 let cards = [];
 let sum = 0;
 let hasBlackJacket = false;
@@ -7,13 +24,13 @@ let messageEl = document.getElementById("message-el");
 let sumEl = document.getElementById("sum-el");
 let cardEl = document.getElementById("cards-el");
 let extraCardOne = false;
-let player = {
+/* let player = {
   name: "Gabriel",
   money: 150
 };
 
 let playerEl = document.getElementById("player-el");
-playerEl.textContent = player.name + ": " + player.money + "€";
+playerEl.textContent = player.name + ": " + player.money + "€"; */
 
 function randomCard() {
   let randomNumbers = Math.floor(Math.random() * 13) + 1;
@@ -28,8 +45,8 @@ function randomCard() {
 function startGame() {
   isALive = true;
   hasBlackJacket = false
-  player.money -= 15;
-  playerEl.textContent = player.name + ": " + player.money + "€";
+  playerTest.money -= 15;
+  playerEl.textContent = playerTest.name + ": " + playerTest.money + "€";
   let firstCard = randomCard();
   let secondCard = randomCard();
   extraCardOne = false;
@@ -125,14 +142,14 @@ function renderGame() {
     message = "Do you want to draw a new card?";
   } else if (sum === 21) {
     message = "You've BlackJacket!";
-    player.money += 30;
-    playerEl.textContent = player.name + ": " + player.money + "€";
+    playerTest.money += 30;
+    playerEl.textContent = playerTest.name + ": " + playerTest.money + "€";
     hasBlackJacket = true;
   } else {
     message = "You are out of game!";
     isALive = false;
-    if (player.money <= 0) {
-      alert("You lost your money! " + player.name);
+    if (playerTest.money <= 0) {
+      alert("You lost your money! " + playerTest.name);
       location.reload();
     }
   }
