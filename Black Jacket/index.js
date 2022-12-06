@@ -1,27 +1,50 @@
 
 let playerTest = {
   name: "",
-  money: 150
+  points: 150
 }
-let playerEl = document.getElementById("player-el");
+const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+let currentDate = `${day}-${month}-${year}`;
+$("#tableDate").text(currentDate);
+
 $(document).ready(function () {
-  let youWantToStartTheGame = confirm("This is a Black Jacket Game. \n How to play: \n 1 => Every time you start a new board you lose 15€ \n 2=> If your cards sum to 21 you Black Jacket and win 30€;\n 3=> If your cards sum is higher then 21 you lose the game;\n Do you want to play?");
+  let youWantToStartTheGame = confirm("This is a Black Jacket Game. \n How to play: \n 1 => Every time you start a new board you lose 15P;\n 2=> If your cards sum to 21 you Black Jacket and win 30P;\n 3=> If your cards sum is higher then 21 you lose the game;\n 4=> You cant Draw more then 5 cards;\n 6=> You start with 150P;\n Do you want to play?");
   if (youWantToStartTheGame === true) {
-    playerTest.name = prompt("Please insert your name below:");
+    const fullNameRule = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    const oneNameRule = '^[a-zA-Z]{3,16}$';
+    const getPlayerName = prompt("Please insert your name below:");
+    if (getPlayerName === null) {
+      playerTest.name = "John Doe";
+      alert("Invalid username.");
+    } else if (getPlayerName.match(fullNameRule) || getPlayerName.match(oneNameRule)) {
+      playerTest.name = getPlayerName;
+    }
   } else {
     location.reload();
   }
-  playerEl.textContent = playerTest.name + ": " + playerTest.money + "€";
-})
-
+  $("#tableUserName").text(playerTest.name);
+  $("#tableUserPoints").text(playerTest.points + "P");
+});
+if ($(window).innerWidth() <= 500) {
+  $("#tableUserLost").text("-15P").css("background-color", "red").css("color", "white");;
+} else {
+  $("#btn-StartGame").on("mouseover", function () {
+    $("#tableUserLost").text("-15P").css("background-color", "red").css("color", "white");
+  })
+  $("#btn-StartGame").on("mouseout", function () {
+    $("#tableUserLost").text("").css("background-color", "white");
+  })
+}
 
 let cards = [];
 let sum = 0;
 let hasBlackJacket = false;
 let isALive = false;
 let message = "";
-let messageEl = document.getElementById("message-el");
-let sumEl = document.getElementById("sum-el");
 let cardEl = document.getElementById("cards-el");
 let extraCardOne = false;
 
@@ -38,8 +61,12 @@ function randomCard() {
 function startGame() {
   isALive = true;
   hasBlackJacket = false
-  playerTest.money -= 15;
-  playerEl.textContent = playerTest.name + ": " + playerTest.money + "€";
+  playerTest.points -= 15;
+  $("#tableUserPoints").text(playerTest.points + "P");
+  $("#tableUserWon").text("");
+  $("#tableUserWon").css("background-color", "white");
+  $("#tableUserWon").css("color", "black");
+  showBoard()
   let firstCard = randomCard();
   let secondCard = randomCard();
   extraCardOne = false;
@@ -51,31 +78,41 @@ function startGame() {
   cards = [firstCard, secondCard];
   sum = firstCard + secondCard;
   renderGame();
+  if (playerTest.points < 0) {
+    alert("You lost your points! " + playerTest.name);
+    location.reload();
+  }
 }
 
 
 function renderGame() {
-  cardEl.textContent = "Cards: ";
+  cardEl.textContent = "";
   for (let i = 0; i < cards.length; i++) {
     cardEl.textContent += cards[i] + " ";
   }
-  sumEl.textContent = "Sum: " + sum;
+  $("#sum-el").text(sum);
   if (sum < 21) {
     message = "Do you want to draw a new card?";
   } else if (sum === 21) {
     message = "You've BlackJacket!";
-    playerTest.money += 30;
-    playerEl.textContent = playerTest.name + ": " + playerTest.money + "€";
+    playerTest.points += 30;
+    $("#tableUserWon").text("+30P");
+    $("#tableUserWon").css("background-color", "green");
+    $("#tableUserWon").css("color", "goldenrod");
+    $("#tableUserPoints").text(playerTest.points + "P");
     hasBlackJacket = true;
+  } else if (cards.length >= 5 && sum != 21) {
+    message = "You are out of game!";
+    isALive = false;
   } else {
     message = "You are out of game!";
     isALive = false;
-    if (playerTest.money <= 0) {
-      alert("You lost your money! " + playerTest.name);
+    if (playerTest.points <= 0) {
+      alert("You lost your points! " + playerTest.name);
       location.reload();
     }
   }
-  messageEl.textContent = message;
+  $("#message-el").text(message);
 }
 
 
@@ -142,5 +179,17 @@ function renderCard(cardNumber, position) {
   } else {
     position.removeClass();
     position.addClass("cardError")
+  }
+}
+
+function showBoard() {
+  const boardGame = $("#cardDisplay");
+  const btnNewCard = $("#btn-newCard");
+  const visible = $("#cardDisplay").attr("data-visible");
+  const visibleBtnNewCard = $("#btn-newCard").attr("data-visible");
+
+  if (visible === "false" && visibleBtnNewCard === "false") {
+    boardGame.attr("data-visible", true);
+    btnNewCard.attr("data-visible", true);
   }
 }

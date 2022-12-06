@@ -1,40 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  background-color: darkgreen;
+  width: 100%;
   height: 100vh;
   text-align: center;
   color: white;
   font-weight: bold;
+  background-color: #1d1e22;
 }
 h1 {
   color: goldenrod;
+  text-shadow: 1px 0px 1px #ffffff, 0px 1px 1px #aaaaaa, 2px 1px 1px #ffffff,
+    1px 2px 1px #aaaaaa, 3px 2px 1px #ffffff, 2px 3px 1px #aaaaaa,
+    4px 3px 1px #ffffff, 3px 4px 1px #aaaaaa, 5px 4px 1px #ffffff,
+    4px 5px 1px #aaaaaa, 6px 5px 1px #ffffff, 5px 6px 1px #aaaaaa,
+    7px 6px 1px #ffffff;
+  font-family: "Zen Dots", cursive;
+  font-size: 2.2rem;
+  margin: 20px auto;
 }
-button {
-  font-size: 1.2rem;
-  width: 150px;
-  background-color: goldenrod;
+
+#IdentificationTable,
+#PointsTable {
+  max-width: 900px;
+  margin: 20px auto;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  transition: all 1s ease;
+}
+
+#IdentificationTable thead tr,
+#PointsTable thead tr {
+  font-family: "Zen Dots", cursive;
+  color: goldenrod;
+}
+
+#IdentificationTable thead th,
+#PointsTable thead th {
   padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin: 5px 0;
+  border-right: 1px solid white;
+}
+#IdentificationTable thead th:last-child,
+#PointsTable thead th:last-child {
+  border-right: none;
+}
+#IdentificationTable tbody tr td,
+#PointsTable tbody tr td {
+  background-color: white;
+  color: black;
+  padding: 5px 20px;
+}
+#IdentificationTable tbody tr td:nth-child(1) {
+  border-radius: 0 0 0 10px;
+}
+#IdentificationTable tbody tr td:nth-child(2) {
+  border-radius: 0 0 10px 0;
+}
+#PointsTable .lastRow td:nth-child(1) {
+  border-radius: 0 0 0 10px;
+  font-family: "Zen Dots", cursive;
+  color: goldenrod;
+  background-color: rgba(0, 0, 0, 1);
+}
+#PointsTable .lastRow td:nth-child(2) {
+  border-radius: 0 0 10px 0;
+}
+
+#PointsTable .pointsLabel td {
+  border-right: 1px solid white;
+  font-family: "Zen Dots", cursive;
+  color: goldenrod;
+  background-color: rgba(0, 0, 0, 1);
+}
+#PointsTable .pointsLabel td:last-child {
+  border-right: none;
 }
 #message-el {
   font-style: italic;
 }
 #cardDisplay {
-  max-width: 100%;
-  height: 200px;
+  max-width: 700px;
+  margin: 20px auto;
+  height: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: 0 5px;
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+#cardDisplay[data-visible="true"] {
+  opacity: 1;
+  height: 200px;
 }
 
 #cardDisplay > div {
-  width: 130px;
-  height: 100%;
+  width: 120px;
+  border-radius: 6px;
+  height: 150px;
+  -webkit-box-shadow: 1px 3px 15px -1px #000000;
+  box-shadow: 1px 3px 15px -1px #000000;
+}
+.gradient-border {
+  --borderWidth: 3px;
+  background: white;
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+.gradient-border:after {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #a166ab,
+    #5073b8,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.btnDisplay {
+  margin: 20px auto;
+  width: 320px;
+  display: flex;
+  gap: 20px;
+}
+button {
+  font-size: 1rem;
+  width: 150px;
+  background-color: goldenrod;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+#btn-newCard {
+  opacity: 0;
+  transition: all 1s ease;
+}
+#btn-newCard[data-visible="true"] {
+  opacity: 1;
 }
 .cardOne {
   background-image: url(./assets/Cards/as.png);
@@ -114,14 +249,45 @@ button {
   transition: all 1s ease;
 }
 @media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  table {
+    font-size: 7px;
+  }
+  #IdentificationTable thead th,
+  #PointsTable thead th {
+    padding: 5px 20px;
+  }
+  #IdentificationTable tbody tr td,
+  #PointsTable tbody tr td {
+    padding: 3px 20px;
+  }
+  .btnDisplay {
+    width: 300px;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 0 20px 0;
+  }
+  button {
+    font-size: 1rem;
+    width: 130px;
+    padding: 10px 20px;
+  }
   #cardDisplay {
     height: auto;
     display: grid;
     grid-template-columns: 50% 50%;
     place-items: center;
+    padding: 10px 5px;
+    max-width: 320px;
   }
   #cardDisplay > div {
-    width: 100%;
-    height: 150px;
+    width: 80px;
+    border-radius: 3px;
+    height: 100.5px;
+  }
+  #cardDisplay[data-visible="true"] {
+    height: auto;
   }
 }
